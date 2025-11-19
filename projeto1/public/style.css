@@ -125,7 +125,7 @@ h3 { font-size: 1.5rem; }  /* Tamanho pequeno para H3 */
 }
 
 /* Cada item dentro do form-row */
-.form-row div {
+.form-row > * {
     display: flex;            /* Flex para organizar label + input */
     flex-direction: column;   /* Em coluna (label em cima) */
 }
