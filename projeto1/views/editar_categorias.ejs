@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Categoria</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <section class="form-box">
+        <h2>✏️ Editar Categoria</h2>
+        
+        <!-- Formulário que envia dados via POST para /categorias/atualizar/:idc -->
+        <!-- O ID da categoria está na URL -->
+        <form action="/categorias/atualizar/<%= categoria.idcategoria %>" method="POST">
+            
+            <!-- Primeira linha: Nome -->
+            <section class="form-row">
+                <!-- Label + Input para nome (obrigatório) -->
+                <section>
+                    <label>Nome *</label>
+                    <!-- Preenche com o valor atual da categoria -->
+                    <input type="text" name="nome" value="<%= categoria.nome %>" required>
+                </section>
+            </section>
+
+            <!-- Segunda linha: Descrição -->
+            <section class="form-row">
+                <!-- Label + Textarea para descrição -->
+                <section>
+                    <label>Descrição</label>
+                    <!-- Preenche com a descrição atual (ou vazio se não existir) -->
+                    <textarea name="descricao"><%= categoria.descricao || '' %></textarea>
+                </div>
+            </section>
+
+            <!-- Grupo de botões (salvar e cancelar) -->
+            <section class="button-group">
+                <!-- Botão para salvar as alterações -->
+                <button type="submit">💾 Salvar Alterações</button>
+                
+                <!-- Link para voltar e cancelar -->
+                <a href="/categorias"><button type="button">❌ Cancelar</button></a>
+            </section>
+        </form>
+    </section>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <section class="container">
+        <h2>📁 Cadastro de Categorias</h2>
+
+        <!-- Seção de formulário para adicionar nova categoria -->
+        <section class="form-section">
+            <h3>Nova Categoria</h3>
+            
+            <!-- Formulário que envia dados via POST para /categorias -->
+            <form action="/categorias" method="POST">
+                <!-- Input para nome da categoria -->
+                <section class="form-row">
+                    <!-- Input para nome (obrigatório) -->
+                    <section>
+                      <input type="text" name="nome" placeholder="Nome da Categoria *" required>
+                    </section>
+                </section>
+                
+                <!-- Textarea para descrição da categoria -->
+                <section class="form-row">
+                    <!-- Textarea onde o usuário pode digitar uma descrição detalhada -->
+                    <section>
+                      <textarea name="descricao" placeholder="Descrição"></textarea>
+                    </section>
+                </section>
+                
+                <!-- Botão para enviar o formulário -->
+                <button type="submit">✅ Adicionar Categoria</button>
+            </form>
+        </section>
+
+        <!-- Se houver erro, exibe a mensagem -->
+        <!-- Isto acontece quando tenta excluir categoria com produtos -->
+        <% if (error) { %>
+            <p class="error">⚠️ <%= error %></p>
+        <% } %>
+
+        <!-- Wrapper da tabela com scroll horizontal -->
+        <section class="table-wrapper">
+            <!-- Tabela que lista todas as categorias -->
+            <table>
+                <!-- Header da tabela -->
+                <tr>
+                    <th>ID</th>         <!-- ID da categoria -->
+                    <th>Nome</th>       <!-- Nome da categoria -->
+                    <th>Descrição</th>  <!-- Descrição da categoria -->
+                    <th>Ações</th>      <!-- Botões editar/excluir -->
+                </tr>
+                
+                <!-- Loopa pelas categorias e cria uma linha para cada -->
+                <% categorias.forEach(cat => { %>
+                    <tr>
+                        <!-- ID da categoria -->
+                        <td><%= cat.idcategoria %></td>
+                        
+                        <!-- Nome da categoria -->
+                        <td><%= cat.nome %></td>
+                        
+                        <!-- Descrição (ou '-' se vazia) -->
+                        <td><%= cat.descricao || '-' %></td>
+                        
+                        <!-- Célula com botões de ação -->
+                        <td>
+                            <section class="action-buttons">
+                                <!-- Link para editar a categoria -->
+                                <a href="/categorias/editar/<%= cat.idcategoria %>">
+                                    <button type="button">✏️ Editar</button>
+                                </a>
+                                
+                                <!-- Formulário para excluir a categoria -->
+                                <form action="/categorias/excluir/<%= cat.idcategoria %>" method="POST">
+                                    <!-- Botão com confirmação antes de excluir -->
+                                    <button type="submit" class="btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️ Excluir</button>
+                                </form>
+                            </section>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+        </section>
+        
+        <!-- Espaço vazio -->
+        <br>
+        
+        <!-- Link para voltar ao menu principal -->
+        <a href="/menu" class="voltar">← Voltar ao Menu</a>
+    </section>
+</body>
+</html>

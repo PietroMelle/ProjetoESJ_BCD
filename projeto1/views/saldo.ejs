@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldos de Estoque</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <!-- Container com largura máxima de 900px para melhor visualização -->
+    <section class="container" style="max-width: 900px;">
+        <h2>📊 Saldos de Estoque</h2>
+        
+        <!-- Wrapper da tabela com scroll horizontal se necessário -->
+        <section class="table-wrapper">
+            <!-- Tabela que mostra o saldo atual de cada produto -->
+            <table>
+                <!-- Header da tabela -->
+                <tr>
+                    <th>ID Produto</th>     <!-- ID do produto -->
+                    <th>Nome</th>           <!-- Nome do produto -->
+                    <th>Saldo Atual</th>    <!-- Saldo atual do estoque -->
+                </tr>
+                
+                <!-- Loopa pelos saldos e cria uma linha para cada produto -->
+                <% saldos.forEach(s => { %>
+                    <tr>
+                        <!-- ID do produto -->
+                        <td><%= s.idproduto %></td>
+                        
+                        <!-- Nome do produto -->
+                        <td><%= s.nome %></td>
+                        
+                        <!-- Saldo atual em negrito (ou 0 se vazio) -->
+                        <!-- Strong deixa o texto em negrito para destacar -->
+                        <td><strong><%= s.saldo || 0 %></strong></td>
+                    </tr>
+                <% }) %>
+            </table>
+        </section>
+        
+        <!-- Espaço vazio -->
+        <br>
+        
+        <!-- Link para voltar ao menu principal -->
+        <a href="/menu" class="voltar">← Voltar ao Menu</a>
+    </section>
+</body>
+</html>

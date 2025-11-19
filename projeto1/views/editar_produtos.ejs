@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <section class="form-box">
+        <h2>✏️ Editar Produto</h2>
+        
+        <!-- Formulário que envia dados via POST para /produtos/atualizar/:idp -->
+        <!-- O ID do produto está na URL -->
+        <form action="/produtos/atualizar/<%= produto.idproduto %>" method="POST">
+            
+            <!-- Primeira linha: Nome e Código Interno -->
+            <section class="form-row">
+                <!-- Label + Input para nome (obrigatório) -->
+                <section>
+                    <label>Nome *</label>
+                    <input type="text" name="nome" value="<%= produto.nome %>" required>
+                </section>
+                
+                <!-- Label + Input para código interno (obrigatório) -->
+                <section>
+                    <label>Código Interno *</label>
+                    <input type="text" name="codigo_interno" value="<%= produto.codigo_interno %>" required>
+                </section>
+            </section>
+
+            <!-- Segunda linha: Categoria e Fabricante -->
+            <section class="form-row">
+                <!-- Select para categoria -->
+                <section>
+                    <label>Categoria</label>
+                    <select name="idcategoria">
+                        <option value="">Nenhuma</option>
+                        <!-- Loopa pelas categorias -->
+                        <% categorias.forEach(c => { %>
+                            <!-- Marca como selected a categoria atual do produto -->
+                            <option value="<%= c.idcategoria %>" <%= produto.idcategoria == c.idcategoria ? 'selected' : '' %>>
+                                <%= c.nome %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </section>
+                
+                <!-- Input para fabricante -->
+                <section>
+                    <label>Fabricante</label>
+                    <input type="text" name="fabricante" value="<%= produto.fabricante || '' %>">
+                </section>
+            </section>
+
+            <!-- Terceira linha: Preço e Estoque Mínimo -->
+            <section class="form-row">
+                <!-- Input para preço de venda (número decimal) -->
+                <section>
+                    <label>Preço de Venda</label>
+                    <input type="number" name="preco_venda" value="<%= produto.preco_venda %>" step="0.01" min="0">
+                </section>
+                
+                <!-- Input para estoque mínimo -->
+                <section>
+                    <label>Estoque Mínimo</label>
+                    <input type="number" name="estoque_minimo" value="<%= produto.estoque_minimo %>" min="0">
+                </section>
+            </section>
+
+            <!-- Quarta linha: Voltagem, Cor e Peso -->
+            <section class="form-row">
+                <!-- Input para voltagem -->
+                <section>
+                    <label>Voltagem</label>
+                    <input type="text" name="voltagem" value="<%= produto.voltagem || '' %>">
+                </section>
+                
+                <!-- Input para cor -->
+                <section>
+                    <label>Cor</label>
+                    <input type="text" name="cor" value="<%= produto.cor || '' %>">
+                </section>
+                
+                <!-- Input para peso em kg -->
+                <section>
+                    <label>Peso (kg)</label>
+                    <input type="number" name="peso" value="<%= produto.peso || '' %>" step="0.01" min="0">
+                </section>
+            </section>
+
+            <!-- Quinta linha: Material e Descrição -->
+            <section class="form-row">
+                <!-- Input para material -->
+                <section>
+                    <label>Material</label>
+                    <input type="text" name="material" value="<%= produto.material || '' %>">
+                </section>
+            </section>
+
+            <!-- Sexta linha: Descrição -->
+            <section class="form-row">
+                <div>
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" value="<%= produto.descricao || '' %>">
+                </div>
+            </section>
+
+            <!-- Grupo de botões (salvar e cancelar) -->
+            <section class="button-group">
+                <!-- Botão para salvar as alterações -->
+                <button type="submit">💾 Salvar Alterações</button>
+                
+                <!-- Link para voltar e cancelar -->
+                <a href="/produtos"><button type="button">❌ Cancelar</button></a>
+            </section>
+        </form>
+    </section>
+</body>
+</html>

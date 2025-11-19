@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<!-- Classe "menu-page" para centralizar o menu na tela -->
+<body class="menu-page">
+    <section class="menu-container">
+        <!-- userName é passado do servidor (server.js) -->
+        <h1>Bem-vindo, <%= userName %>! 👋</h1>
+        
+        <!-- Link para a página de Categorias -->
+        <a href="/categorias">📁 Gerenciar Categorias</a>
+        
+        <!-- Link para a página de Produtos -->
+        <a href="/produtos">📦 Gerenciar Produtos</a>
+        
+        <!-- Link para a página de Movimento de Estoque -->
+        <a href="/movimento">↔️ Movimentar Estoque</a>
+        
+        <!-- Link para a página de Consulta de Saldos -->
+        <a href="/saldo">📊 Consultar Saldos</a>
+        
+        <!-- Formulário que faz logout do usuário -->
+        <!-- Envia POST para a rota /logout no servidor -->
+        <form action="/logout" method="POST">
+            <!-- Botão para desconectar -->
+            <button type="submit">🚪 Sair</button>
+        </form>
+    </section>
+</body>
+</html>

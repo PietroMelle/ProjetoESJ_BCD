@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentação de Estoque</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <!-- Container com largura máxima reduzida para melhor apresentação -->
+    <section class="container" style="max-width: 600px;">
+        <h2>↔️ Movimentação de Estoque</h2>
+        
+        <!-- Seção de formulário -->
+        <section class="form-section">
+            <!-- Formulário que envia dados via POST para /movimento -->
+            <form action="/movimento" method="POST">
+                
+                <!-- Primeira linha: Seleção do Produto -->
+                <section class="form-row">
+                    <section>
+                        <!-- Label para o select -->
+                        <label>Produto *</label>
+                        
+                        <!-- Select para escolher qual produto movimentar -->
+                        <select name="idproduto" required>
+                            <option value="">Selecione o Produto</option>
+                            
+                            <!-- Loopa pelos produtos e cria uma opção para cada -->
+                            <% produtos.forEach(p => { %>
+                                <!-- Exibe o nome do produto e o saldo atual -->
+                                <option value="<%= p.idproduto %>"><%= p.nome %> (Saldo: <%= p.saldo || 0 %>)</option>
+                            <% }) %>
+                        </select>
+                    </section>
+                </section>
+                
+                <!-- Segunda linha: Tipo de Movimento e Quantidade -->
+                <section class="form-row">
+                    <!-- Select para escolher se é entrada ou saída -->
+                    <section>
+                        <label>Tipo de Movimento *</label>
+                        <select name="tipo" required>
+                            <option value="">Selecione</option>
+                            
+                            <!-- Opção para ENTRADA (E) -->
+                            <option value="E">📥 Entrada</option>
+                            
+                            <!-- Opção para SAÍDA (S) -->
+                            <option value="S">📤 Saída</option>
+                        </select>
+                    </section>
+                    
+                    <!-- Input para quantidade a movimentar -->
+                    <section>
+                        <label>Quantidade *</label>
+                        <!-- Input do tipo number (só aceita números positivos) -->
+                        <input type="number" name="quantidade" min="1" placeholder="Quantidade" required>
+                    </section>
+                </section>
+                
+                <!-- Botão para registrar o movimento -->
+                <button type="submit">✅ Registrar Movimento</button>
+            </form>
+        </section>
+
+        <!-- Se houver mensagem de sucesso, exibe em verde -->
+        <!-- Isto aparece quando movimento é registrado com sucesso -->
+        <% if (message) { %><p class="success">✔️ <%= message %></p><% } %>
+        
+        <!-- Se houver erro, exibe em vermelho -->
+        <!-- Isto aparece quando há problema (saldo insuficiente, quantidade inválida, etc) -->
+        <% if (error) { %><p class="error">⚠️ <%= error %></p><% } %>
+
+        <!-- Link para voltar ao menu principal -->
+        <a href="/menu" class="voltar">← Voltar ao Menu</a>
+    </section>
+</body>
+</html>
