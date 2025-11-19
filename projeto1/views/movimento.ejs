@@ -10,6 +10,12 @@
 <body>
     <!-- Container com largura máxima reduzida para melhor apresentação -->
     <section class="container" style="max-width: 600px;">
+        <!-- Link para voltar ao menu principal -->
+        <a href="/menu" class="voltar">← Voltar ao Menu</a>
+
+        <br />
+        <br />
+
         <h2>↔️ Movimentação de Estoque</h2>
         
         <!-- Seção de formulário -->
@@ -73,8 +79,6 @@
         <!-- Isto aparece quando há problema (saldo insuficiente, quantidade inválida, etc) -->
         <% if (error) { %><p class="error">⚠️ <%= error %></p><% } %>
 
-        <!-- Link para voltar ao menu principal -->
-        <a href="/menu" class="voltar">← Voltar ao Menu</a>
     </section>
 </body>
 </html>
